@@ -1,71 +1,53 @@
-# codebuddy-ai README
+# 🧠 CodeBuddy AI — Smart Code Verification & Quiz Extension
 
-This is the README for your extension "codebuddy-ai". After writing up a brief description, we recommend including the following sections.
+**CodeBuddy AI**, özellikle yapay zeka araçları (ChatGPT, GitHub Copilot, Cursor, Claude Dev vb.) tarafından üretilen veya sıfırdan yazılan kodların geliştirici tarafından gerçekten anlaşılıp anlaşılmadığını denetleyen akıllı bir **VS Code Eklentisi** ve **FastAPI Backend** mimarisidir.
 
-## Features
-
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Günümüz yazılım geliştirme süreçlerinde artan "blind copy-paste" (anlamadan kod yapıştırma) ve kontrolsüz AI kod üretimi alışkanlığına karşı; geliştiricinin koda olan hakimiyetini, farkındalığını ve kod kalitesini artırmayı hedefler.
 
 ---
 
-## Following extension guidelines
+## 🌟 Öne Çıkan Özellikler
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+* 🎯 **Seçim Odaklı Quiz Üretimi (Manuel Mod):** Editörde istediğin kod bloğunu seçip (Highlight) sağ tık menüsünden veya kısayolla anında o koda özel test ürettirebilirsin.
+* ⚡ **Akıllı Kod Analizi (Smart Diff):** Kod farklarını anlamsal olarak analiz eder; yorum satırları, boşluklar veya formatlama değişikliklerini eleyerek sadece kritik mantıksal değişimlere odaklanır.
+* 🤖 **AI Code Auditor:** Gemini 3.1 Flash-Lite altyapısını kullanarak kodun değişken adlarını ezbere sormak yerine; **asenkron davranışları**, **iş mantığını**, **edge case'leri** ve **performans/güvenlik açıklarını** sorgulayan Türkçe, 3 seçenekli teknik quizler üretir.
+* 🚀 **Non-Blocking & Performanslı:** VS Code düzenleme akışını asla kesintiye uğratmaz, arka planda asenkron çalışır ve yanıtları duruma göre Webview panelinde veya bildirimlerde sunar.
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+---
 
-## Working with Markdown
+## 🛠️ Mimari ve Teknolojiler
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+Proje modüler bir **Client-Server** yapısında kurgulanmıştır:
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+### 1. Frontend / Extension (VS Code)
+* **Dil:** TypeScript
+* **Editör Entegrasyonu:** VS Code Extension API (`vscode.window`, `vscode.commands`, `vscode.workspace`)
+* **Arayüz:** Webview Panel (HTML, CSS, Message Passing API)
 
-## For more information
+### 2. Backend API
+* **Framework:** Python / FastAPI
+* **AI SDK:** `google-genai` (Google AI Studio)
+* **Model:** `gemini-3.1-flash-lite`
+* **Veri Doğrulama:** Pydantic (Structured Outputs ile JSON şeması garantisi)
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+---
 
-**Enjoy!**
+## ⚙️ Nasıl Çalışır? (İş Akışı)
+
+```text
+[ Geliştirici Kod Yazar / Seçer ]
+               │
+               ▼
+[ VS Code Eklentisi (TypeScript) ] ── (Anlamlı Kod Bloğu & AST Ayıklama)
+               │
+               ▼
+   [ POST /analiz-et İsteği ]
+               │
+               ▼
+ [ FastAPI Backend + Pydantic ] ── (Structured Output JSON Şeması)
+               │
+               ▼
+[ Gemini 3.1 Flash-Lite Modeli ] ── (Teknik Türkçe Quiz Üretimi)
+               │
+               ▼
+[ Interactive Webview Paneli ] ── (Kullanıcı Doğru/Yanlış Yanıtlar)

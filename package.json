@@ -9,7 +9,6 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
@@ -18,7 +17,10 @@
         "title": "Hello World"
       }
     ]
-  },
+  },  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:typescript"
+  ],
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
@@ -41,4 +43,5 @@
     "diff": "^8.0.4",
     "serialize-javascript": "^7.0.6"
   }
+  
 }
