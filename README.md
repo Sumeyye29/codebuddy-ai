@@ -4,7 +4,7 @@
 
 Günümüz yazılım geliştirme süreçlerinde artan "blind copy-paste" (anlamadan kod yapıştırma) ve kontrolsüz AI kod üretimi alışkanlığına karşı; geliştiricinin koda olan hakimiyetini, farkındalığını ve kod kalitesini artırmayı hedefler.
 
-Dipnot: Proje tamamlanmamış olup geliştirme aşamasındadır.
+Not: Proje tamamlanmamış olup geliştirme aşamasındadır.
 
 ## 🌟 Öne Çıkan Özellikler
 
