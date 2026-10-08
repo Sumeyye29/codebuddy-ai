@@ -1,5 +1,5 @@
-import os
 import json
+from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from typing import List
@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 
-# .env dosyasındaki değişkenleri yüklüyoruz
-load_dotenv()
+# .env dosyasındaki değişkenleri, çalışma dizininden bağımsız olarak yüklüyoruz
+load_dotenv(Path(__file__).with_name(".env"))
 
 app = FastAPI()
 

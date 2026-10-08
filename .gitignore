@@ -4,4 +4,7 @@ node_modules
 .vscode-test/
 *.vsix
 backend/venv/
+backend/.venv/
 backend/.env
+__pycache__/
+*.py[cod]
